@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Barman Marketing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+            background-color: #0f172a; /* ডার্ক থিম */
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .signup-container {
+            background-color: #1e293b;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid #334155;
+        }
+        .signup-container h2 {
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 26px;
+            color: #2dd4bf; /* নিয়ন গ্রিন */
+        }
+        .signup-container p {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+        
+        /* অ্যাকাউন্ট টাইপ সিলেক্টর (Buyer vs Seller) */
+        .account-type-selector {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .type-card {
+            flex: 1;
+            background-color: #0f172a;
+            border: 2px solid #334155;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .type-card:hover {
+            border-color: #3b82f6;
+        }
+        /* রেডিও বাটন হাইড করা হয়েছে, কিন্তু কাজ করবে */
+        .type-card input[type="radio"] {
+            display: none; 
+        }
+        .type-card h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #e2e8f0;
+        }
+        .type-card span {
+            font-size: 12px;
+            color: #64748b;
+        }
+        /* রেডিও সিলেক্ট করলে কার্ডের রঙ পরিবর্তন হবে */
+        .type-card input[type="radio"]:checked + h3 {
+            color: #2dd4bf;
+        }
+        .type-card input[type="radio"]:checked ~ span {
+            color: #cbd5e1;
+        }
+        .type-card:has(input[type="radio"]:checked) {
+            border-color: #2dd4bf;
+            background-color: rgba(45, 212, 191, 0.05);
+            box-shadow: 0 0 15px rgba(45, 212, 191, 0.2);
+        }
+
+        /* ইনপুট ফিল্ড */
+        .input-group {
+            margin-bottom: 18px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #cbd5e1;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .input-group input:focus {
+            border-color: #2dd4bf;
+            box-shadow: 0 0 10px rgba(45, 212, 191, 0.2);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, #2dd4bf, #3b82f6);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+        .btn-submit:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+        .login-link a {
+            color: #2dd4bf;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="signup-container">
+        <h2>Join Barman</h2>
+        <p>আপনার অ্যাকাউন্টের ধরন নির্বাচন করুন</p>
+        
+        <form action="#" method="POST">
+            <!-- অ্যাকাউন্ট টাইপ -->
+            <div class="account-type-selector">
+                <label class="type-card">
+                    <input type="radio" name="account_type" value="buyer" checked>
+                    <h3>🛒 Buyer</h3>
+                    <span>আমি কিনতে চাই</span>
+                </label>
+                <label class="type-card">
+                    <input type="radio" name="account_type" value="vendor">
+                    <h3>💼 Vendor</h3>
+                    <span>আমি বিক্রি করতে চাই</span>
+                </label>
+            </div>
+
+            <div class="input-group">
+                <label>আপনার নাম (Full Name)</label>
+                <input type="text" placeholder="যেমন: রফিকুল ইসলাম" required>
+            </div>
+            
+            <div class="input-group">
+                <label>ইমেইল অ্যাড্রেস (Email)</label>
+                <input type="email" placeholder="example@email.com" required>
+            </div>
+            
+            <div class="input-group">
+                <label>পাসওয়ার্ড (Password)</label>
+                <input type="password" placeholder="কমপক্ষে ৬ অক্ষরের পাসওয়ার্ড দিন" required>
+            </div>
+
+            <button type="submit" class="btn-submit">Create Account</button>
+        </form>
+
+        <div class="login-link">
+            আগে থেকেই অ্যাকাউন্ট আছে? <a href="#">লগইন করুন</a>
+        </div>
+    </div>
+
+</body>
+</html>
