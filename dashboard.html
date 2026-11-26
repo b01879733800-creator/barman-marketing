@@ -1,101 +1,213 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Barman Marketing</title>
+    <title>BarmanX - Dashboard</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: #0f172a; color: #f8fafc; min-height: 100vh; }
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background-color: rgba(30, 41, 59, 0.8); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #334155; }
-        .logo { font-size: 24px; font-weight: 700; color: #10b981; }
-        .logout-btn { background-color: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        .container { padding: 40px 5%; }
-        h2 { margin-bottom: 20px; font-size: 28px; }
-        #productList { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .product-card { border: 1px solid #334155; padding: 15px; border-radius: 10px; background-color: #1e293b; }
-        .product-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
-        .product-card h3 { color: #10b981; margin-bottom: 10px; font-size: 20px; }
-        .product-card p { font-size: 14px; color: #cbd5e1; margin-bottom: 8px; }
-        .product-price { font-size: 18px; font-weight: bold; color: #fbbf24; }
+        /* --- ডিজাইন (CSS) --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121212; /* ডার্ক ব্যাকগ্রাউন্ড */
+            color: white;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* সাইডবার স্টাইল */
+        .sidebar {
+            width: 260px;
+            background-color: #6C63FF; /* আপনার ডিজাইনের পার্পল কালার */
+            height: 100%;
+            padding: 20px;
+            overflow-y: auto;
+            transition: 0.3s;
+        }
+
+        .logo-area {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-area h2 {
+            color: white;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 1px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        /* মেনু বাটন স্টাইল */
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .menu-item i {
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        /* মেইন কন্টেন্ট এরিয়া */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1E1E1E;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+
+        /* রোল সিলেক্ট ড্রপডাউন */
+        select {
+            padding: 8px 12px;
+            background-color: #6C63FF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+            margin-left: 10px;
+        }
+
+        .content-box {
+            background-color: #1E1E1E;
+            padding: 30px;
+            border-radius: 10px;
+            height: 100%;
+            border: 1px solid #333;
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">Barman Marketing</div>
-        <button class="logout-btn" onclick="logout()">Logout</button>
-    </nav>
 
-    <div class="container">
-        <h2>Available Products</h2>
-        <div id="productList">Loading products...</div>
+    <!-- সাইডবার -->
+    <div class="sidebar">
+        <div class="logo-area">
+            <h2>BarmanX</h2>
+        </div>
+
+        <div class="section-title">QUICK ACTIONS</div>
+        <a href="#" class="menu-item"><i>🏠</i> Home</a>
+        <a href="#" class="menu-item"><i>🔒</i> Privacy Policy</a>
+
+        <div class="section-title">MAIN MENU (Role Based)</div>
+        <!-- এই ডিভের ভেতরের মেনু জাভাস্ক্রিপ্ট দিয়ে কন্ট্রোল হবে -->
+        <div id="dynamic-menu"></div>
+
+        <div class="section-title">UTILITY</div>
+        <a href="#" class="menu-item"><i>🔗</i> Share App</a>
+        <a href="#" class="menu-item"><i>⭐</i> Rate App</a>
+        <a href="#" class="menu-item" style="background-color: #D9534F; margin-top: 10px;"><i>🚪</i> Exit App</a>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    <!-- মেইন কন্টেন্ট -->
+    <div class="main-content">
+        <div class="top-bar">
+            <h3 id="dashboard-title">Welcome to Dashboard</h3>
+            
+            <!-- রোল চেঞ্জ করার ড্রপডাউন (টেস্ট করার জন্য) -->
+            <div>
+                <label style="font-size: 14px; color: #aaa;">Select Role: </label>
+                <select id="role-selector" onchange="changeRole()">
+                    <option value="customer">Customer (কাস্টমার)</option>
+                    <option value="business">Business Owner (ব্যবসায়ী)</option>
+                    <option value="marketer">Marketer (মার্কেটার)</option>
+                </select>
+            </div>
+        </div>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDFK97UqNMmV0PLcCiKelBrnxurMXBDLPs",
-            authDomain: "barman-market.firebaseapp.com",
-            projectId: "barman-market",
-            storageBucket: "barman-market.firebasestorage.app",
-            messagingSenderId: "1034964147995",
-            appId: "1:1034964147995:web:525542140ca017dcbbbdbe"
+        <div class="content-box">
+            <h2 id="page-title">Customer Dashboard</h2>
+            <p style="margin-top: 15px; color: #aaa; line-height: 1.6;">
+                এখানে আপনার মূল কাজগুলো (প্রোডাক্ট লিস্ট, ফর্ম ইত্যাদি) দেখাবে। <br><br>
+                <strong>টেস্ট করতে:</strong> উপরে ডানদিকের "Select Role" ড্রপডাউন থেকে রোল বদলিয়ে দেখুন। দেখবেন বাম দিকের মেনু অটোমেটিক্যালি বদলে যাচ্ছে!
+            </p>
+        </div>
+    </div>
+
+    <!-- --- লজিক (JavaScript) --- -->
+    <script>
+        // বিভিন্ন রোলের জন্য মেনু অপশন
+        const menus = {
+            customer: `
+                <a href="#" class="menu-item"><i>🛍️</i> Shop</a>
+                <a href="#" class="menu-item"><i>🛒</i> My Cart</a>
+                <a href="#" class="menu-item"><i>📦</i> My Orders</a>
+            `,
+            business: `
+                <a href="#" class="menu-item"><i>🏪</i> My Store</a>
+                <a href="#" class="menu-item"><i>➕</i> Add Product</a>
+                <a href="#" class="menu-item"><i>📊</i> Inventory</a>
+                <a href="#" class="menu-item"><i>💰</i> Earnings</a>
+            `,
+            marketer: `
+                <a href="#" class="menu-item"><i>📢</i> Campaigns</a>
+                <a href="#" class="menu-item"><i>📈</i> Analytics</a>
+                <a href="#" class="menu-item"><i>🔗</i> Affiliate Links</a>
+            `
         };
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        onAuthStateChanged(auth, (user) => {
-            if (!user) { window.location.href = "login.html"; }
-        });
-
-        window.logout = function() {
-            signOut(auth).then(() => { window.location.href = "login.html"; });
-        };
-
-        async function loadProducts() {
-            const productListDiv = document.getElementById('productList');
+        // রোল পরিবর্তন করার ফাংশন
+        function changeRole() {
+            // ড্রপডাউন থেকে ভ্যালু নিন
+            let selectedRole = document.getElementById("role-selector").value;
             
-            // ⚠️ এখানে আপনার কালেকশনের নাম দিন (যদি 'products' না হয়)
-            const collectionName = "products"; 
+            // মেনু আপডেট করুন
+            document.getElementById("dynamic-menu").innerHTML = menus[selectedRole];
             
-            try {
-                const querySnapshot = await getDocs(collection(db, collectionName));
-                let htmlContent = "";
-
-                if (querySnapshot.empty) {
-                    productListDiv.innerHTML = "<p>দুঃখিত, কোনো পণ্য পাওয়া যায়নি।</p>";
-                    return;
-                }
-
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    
-                    // এখানে ফায়ারবেসের ফিল্ডের নাম হুবহু মিলিয়ে দেওয়া হয়েছে
-                    htmlContent += `
-                        <div class="product-card">
-                            <img src="${data.imageUrl || 'https://via.placeholder.com/150'}" alt="${data.productName}">
-                            <h3>${data.productName}</h3>
-                            <p>${data.productDescription || 'No description available.'}</p>
-                            <p><strong>Vendor:</strong> ${data.vendorName || 'Unknown'}</p>
-                            <p class="product-price">৳${data.Price}</p>
-                        </div>
-                    `;
-                });
-
-                productListDiv.innerHTML = htmlContent;
-
-            } catch (error) {
-                console.error("Error fetching data: ", error);
-                productListDiv.innerHTML = `<p style="color: red;">এরর: ${error.message}</p>`;
+            // টাইটেল আপডেট করুন
+            if(selectedRole === 'customer') {
+                document.getElementById("page-title").innerText = "Customer Dashboard";
+            } else if (selectedRole === 'business') {
+                document.getElementById("page-title").innerText = "Business Owner Dashboard";
+            } else {
+                document.getElementById("page-title").innerText = "Marketer Dashboard";
             }
         }
 
-        loadProducts();
+        // পেজ লোড হলেই যেন কাস্টমারের মেনু দেখায়
+        window.onload = function() {
+            changeRole();
+        };
     </script>
+
 </body>
 </html>
