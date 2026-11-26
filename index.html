@@ -1,196 +1,587 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barman Marketing | Premium Marketplace</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barman Marketing | Premium Affiliate Partnerships</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ================= গ্লোবাল স্টাইল ================= */
+  :root {
+    --bg-dark: #0A0D14;
+    --bg-card: #141924;
+    --gold: #D4AF37;
+    --gold-hover: #F3C93A;
+    --text-main: #FFFFFF;
+    --text-muted: #8B94A3;
+    --border: #232A3B;
+  }
 
-        body {
-            background-color: #0f172a; /* Premium Dark Blue */
-            color: #f8fafc;
-        }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-        /* Navbar */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background-color: rgba(15, 23, 42, 0.9);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid #1e293b;
-        }
+  h1, h2, h3, .brand-font {
+    font-family: 'Playfair Display', serif;
+  }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #10b981; /* Emerald Green */
-            letter-spacing: 1px;
-        }
+  /* ================= প্রোগ্রেস বার ================= */
+  .progress-wrap {
+    position: sticky; top:0; z-index: 1000;
+    background: rgba(10, 13, 20, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 20px 12px;
+  }
+  .progress-track {
+    position:relative; height:3px; background:#1F2533; border-radius:10px; margin-bottom:12px;
+  }
+  .progress-fill {
+    position:absolute; left:0; top:0; height:100%; width:0%;
+    background: linear-gradient(90deg, #997A00, var(--gold)); border-radius:10px;
+    transition: width .5s ease;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+  }
+  .steps-labels {
+    display:flex; justify-content:space-between; font-size:.65rem;
+    color:var(--text-muted); overflow-x:auto; gap:8px; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .steps-labels span { white-space:nowrap; padding:2px 4px; transition: 0.3s; }
+  .steps-labels span.active { color:var(--gold); font-weight:700; }
 
-        .nav-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: 400;
-            transition: 0.3s;
-        }
+  /* ================= স্ক্রিন কন্টেইনার ================= */
+  .screen {
+    display:none; max-width: 520px; margin: 40px auto 80px;
+    background: var(--bg-card);
+    border-radius: 16px; padding: 40px 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--border);
+    animation: fadeIn .5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .screen.active { display:block; }
+  @keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:none;} }
 
-        .nav-links a:hover {
-            color: #10b981;
-        }
+  h1 { font-size:2rem; margin-bottom:10px; color: var(--text-main); }
+  h2 { font-size:1.4rem; margin-bottom:10px; color: var(--gold); }
+  p.sub { color:var(--text-muted); font-size:.9rem; margin-bottom:24px; line-height: 1.5; }
+  .center { text-align: center; }
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 100px 20px;
-            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-        }
+  /* লোগো ও হিরো */
+  .logo-box {
+    width:70px; height:70px; border-radius:12px; margin:0 auto 20px;
+    display:flex; align-items:center; justify-content:center;
+    background: linear-gradient(135deg, #1A1F2B, #0A0D14);
+    border: 1px solid var(--gold);
+    color:var(--gold); font-size:2rem; font-weight:700;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+  }
+  .hero-title { font-size: 2.2rem; line-height: 1.2; margin-bottom: 15px; }
+  .hero-sub { font-size: 1rem; color: var(--gold); font-weight: 500; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+  
+  /* ফর্ম স্টাইল */
+  label { display:block; font-size:.8rem; font-weight:500; color:var(--text-muted); margin-bottom:8px; text-transform: uppercase; letter-spacing: 1px; }
+  input, select {
+    width:100%; padding:14px 16px; border:1px solid var(--border);
+    border-radius:8px; font-size:.95rem; margin-bottom:20px; background: #0A0D14;
+    color: var(--text-main); transition: all 0.3s;
+  }
+  input:focus, select:focus { outline:none; border-color:var(--gold); box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1); }
+  select option { background: var(--bg-card); color: var(--text-main); }
 
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, #10b981, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+  /* বাটন */
+  .btn {
+    width:100%; padding:15px; border:none; border-radius:8px;
+    font-size:1rem; font-weight:600; cursor:pointer; transition: all 0.3s; font-family: 'Inter', sans-serif;
+  }
+  .btn-primary { 
+    background: linear-gradient(135deg, var(--gold), #B8952E); 
+    color: #000; 
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); 
+  }
+  .btn-primary:hover { 
+    background: linear-gradient(135deg, var(--gold-hover), var(--gold)); 
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4); 
+    transform: translateY(-2px);
+  }
+  .btn-ghost { background:transparent; color:var(--text-muted); border:1px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--text-main); color: var(--text-main); }
+  .btn-row { display:flex; gap:12px; margin-top:15px; }
+  .btn-row .btn { flex:1; }
 
-        .hero p {
-            font-size: 18px;
-            color: #94a3b8;
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
+  /* অ্যালার্ট */
+  .alert { background:rgba(231, 76, 60, 0.1); border-left:3px solid #e74c3c; color:#ff8a80; padding:12px; border-radius:6px; font-size:.85rem; margin-bottom:20px; display:none; }
+  .alert.show { display:block; }
+  .alert-ok { background:rgba(46, 204, 113, 0.1); border-left-color:#2ecc71; color:#7bed9f; }
 
-        .cta-btn {
-            background: #10b981;
-            color: white;
-            padding: 15px 35px;
-            border: none;
-            border-radius: 30px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-        }
+  /* ড্যাশবোর্ড */
+  .user-card {
+    display:flex; align-items:center; gap:16px;
+    background: #0A0D14; padding:20px; border-radius:12px; margin-bottom:24px; border: 1px solid var(--border);
+  }
+  .avatar {
+    width:50px; height:50px; border-radius:50%; flex-shrink:0;
+    background: linear-gradient(135deg, var(--gold), #B8952E); color:#000;
+    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.2rem;
+  }
+  .user-card .info b { font-size:1.1rem; display: block; margin-bottom: 2px; }
+  .user-card .info small { color:var(--text-muted); display:block; font-size: 0.8rem; }
 
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.6);
-        }
+  .quick-grid { display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:10px; }
+  .quick-card {
+    background:#0A0D14; border:1px solid var(--border); border-radius:12px;
+    padding:20px 15px; text-align:center; cursor:pointer; transition:.3s;
+  }
+  .quick-card:hover { border-color:var(--gold); background:#141924; transform: translateY(-3px); }
+  .quick-card .ic { font-size:1.8rem; display:block; margin-bottom:10px; }
+  .quick-card span { font-size:.85rem; font-weight:500; color:var(--text-muted); }
+  .quick-card:hover span { color: var(--text-main); }
 
-        /* Features */
-        .features {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            padding: 60px 5%;
-            flex-wrap: wrap;
-            background-color: #0f172a;
-        }
+  /* সার্ভিস কার্ড */
+  .service-card {
+    display:flex; align-items:flex-start; gap:16px;
+    border:1px solid var(--border); border-radius:12px; padding:20px;
+    margin-bottom:15px; cursor:pointer; transition:.3s; background: #0A0D14;
+  }
+  .service-card:hover { border-color:rgba(212, 175, 55, 0.5); }
+  .service-card.selected { border-color:var(--gold); background:rgba(212, 175, 55, 0.05); }
+  .service-card .ic { font-size:1.8rem; }
+  .service-card .txt b { display:block; font-size:1rem; margin-bottom:4px; }
+  .service-card .txt small { color:var(--text-muted); font-size:.85rem; line-height: 1.4; }
 
-        .card {
-            background-color: #1e293b;
-            padding: 40px 30px;
-            border-radius: 15px;
-            width: 300px;
-            text-align: center;
-            border: 1px solid #334155;
-            transition: 0.3s;
-        }
+  /* প্ল্যান কার্ড */
+  .plan-card {
+    border:1px solid var(--border); border-radius:12px; padding:24px;
+    margin-bottom:15px; cursor:pointer; transition:.3s; position:relative; background: #0A0D14;
+  }
+  .plan-card:hover { border-color:rgba(212, 175, 55, 0.5); }
+  .plan-card.selected { border-color:var(--gold); background:rgba(212, 175, 55, 0.05); }
+  .plan-card .badge {
+    position:absolute; top:-12px; right:20px; background:var(--gold); color:#000;
+    font-size:.7rem; font-weight:700; padding:4px 12px; border-radius:20px; letter-spacing: 1px;
+  }
+  .plan-card .price { font-size:1.8rem; font-weight:700; color:var(--text-main); margin:10px 0; font-family: 'Playfair Display', serif; }
+  .plan-card .price small { font-size:.9rem; font-weight:400; color:var(--text-muted); font-family: 'Inter', sans-serif; }
+  .plan-card ul { list-style:none; margin-top:15px; font-size:.9rem; color:var(--text-muted); }
+  .plan-card ul li { padding:6px 0; display: flex; align-items: center; gap: 8px; }
+  .plan-card ul li::before { content:"✦"; color:var(--gold); font-size: 1rem; }
 
-        .card:hover {
-            border-color: #10b981;
-            transform: translateY(-5px);
-        }
+  /* পেমেন্ট সামারি */
+  .summary {
+    background:#0A0D14; border: 1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:24px;
+  }
+  .summary .row { display:flex; justify-content:space-between; font-size:.95rem; padding:8px 0; color: var(--text-muted); }
+  .summary .row b { color: var(--text-main); }
+  .summary .row.total { border-top:1px solid var(--border); margin-top:10px; padding-top:15px; font-weight:700; font-size:1.1rem; color:var(--gold); }
+  .summary .row.total b { color: var(--gold); }
 
-        .card h3 {
-            color: #f1f5f9;
-            margin-bottom: 15px;
-            font-size: 22px;
-        }
-
-        .card p {
-            color: #94a3b8;
-            font-size: 15px;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 30px;
-            background-color: #020617;
-            color: #64748b;
-            border-top: 1px solid #1e293b;
-        }
-    </style>
+  /* সফল স্ক্রিন */
+  .success-icon {
+    width:80px; height:80px; border-radius:50%; margin:0 auto 20px;
+    background:rgba(212, 175, 55, 0.1); color:var(--gold); border: 1px solid var(--gold);
+    display:flex; align-items:center; justify-content:center; font-size:2.5rem;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+  }
+  
+  .footer-note { text-align:center; font-size:.75rem; color:var(--text-muted); margin-top:30px; letter-spacing: 1px; text-transform: uppercase; }
+</style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">BARMAN MARKETING</div>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Products</a>
-            <a href="#">Vendors</a>
-        </div>
-    </nav>
+<!-- ================= প্রোগ্রেস বার ================= -->
+<div class="progress-wrap">
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="steps-labels" id="stepsLabels">
+    <span data-step="0">Home</span>
+    <span data-step="1">Register</span>
+    <span data-step="2">Login</span>
+    <span data-step="3">Dashboard</span>
+    <span data-step="4">Services</span>
+    <span data-step="5">Pricing</span>
+    <span data-step="6">Payment</span>
+    <span data-step="7">Success</span>
+  </div>
+</div>
 
-    <section class="hero">
-        <h1>Premium Affiliate Marketplace</h1>
-        <p>সঠিক দামে বিক্রি করুন, ন্যায্য দামে কিনুন। বাংলাদেশের সবচেয়ে বিশ্বস্ত মার্কেটপ্লেসে আপনাকে স্বাগতম।</p>
-        <a href="signup.html" class="cta-btn">Get Started</a>
-    </section>
+<!-- ================= ধাপ ০: ল্যান্ডিং (হোম) ================= -->
+<div id="step0" class="screen active">
+  <div class="center">
+    <div class="logo-box">B</div>
+    <h1 class="hero-title">Barman Marketing</h1>
+    <div class="hero-sub">The Standard for Premium Affiliate Partnerships.</div>
+    <p class="sub">আমরা শুধুমাত্র হাই-টিকেট এবং প্রিমিয়াম ক্লায়েন্টদের নিয়ে কাজ করি। আপনার ব্যবসার সর্বোচ্চ গ্রোথ নিশ্চিত করতে আমাদের এক্সক্লুসিভ নেটওয়ার্কে যোগ দিন।</p>
+  </div>
+  
+  <div class="btn-row" style="margin-top: 30px;">
+    <button class="btn btn-primary" onclick="goTo(1)">Apply for Partnership (Register)</button>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-ghost" onclick="goTo(2)">Already a Member? Login</button>
+  </div>
+  <div class="footer-note">✦ Exclusive Access ✦</div>
+</div>
 
-    <section class="features">
-        <div class="card">
-            <h3>🚀 সেলারদের জন্য</h3>
-            <p>নিজের ড্যাশবোর্ড থেকে সহজে পণ্য আপলোড করুন এবং সঠিক দামে বিক্রি করুন।</p>
-        </div>
-        <div class="card">
-            <h3>🛍️ কাস্টমারদের জন্য</h3>
-            <p>প্রিমিয়াম কোয়ালিটি সম্পন্ন পণ্য, স্বচ্ছ মূল্য এবং নিরাপদ কেনাকাটা।</p>
-        </div>
-        <div class="card">
-            <h3>💼 কমিশন সিস্টেম</h3>
-            <p>প্রতিটি সফল বিক্রয়ের উপর অল্প পরিমাণ কমিশন, কোনো লুকানো চার্জ নেই।</p>
-        </div>
-    </section>
+<!-- ================= ধাপ ১: রেজিস্ট্রেশন ================= -->
+<div id="step1" class="screen">
+  <h1 class="brand-font">Apply for Partnership</h1>
+  <p class="sub">আপনার প্রিমিয়াম অ্যাকাউন্ট তৈরি করুন।</p>
+  <div class="alert" id="regAlert"></div>
 
-    <footer>
-        &copy; 2024 Barman Marketing. All rights reserved.
-    </footer>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  <label>Full Name</label>
+  <input id="regName" type="text" placeholder="আপনার পুরো নাম">
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDFK97UqNMmV0PLcCiKelBrnxurMXBDLPs",
-    authDomain: "barman-market.firebaseapp.com",
-    projectId: "barman-market",
-    storageBucket: "barman-market.firebasestorage.app",
-    messagingSenderId: "1034964147995",
-    appId: "1:1034964147995:web:525542140ca017dcbbbdbe"
-  };
+  <label>Business Email</label>
+  <input id="regEmail" type="email" placeholder="you@company.com">
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+  <label>Mobile Number</label>
+  <input id="regPhone" type="tel" placeholder="01XXXXXXXXX">
+
+  <label>Secure Password</label>
+  <input id="regPass" type="password" placeholder="কমপক্ষে ৬ অক্ষর">
+
+  <label>Confirm Password</label>
+  <input id="regPass2" type="password" placeholder="আবার লিখুন">
+
+  <button class="btn btn-primary" onclick="doRegister()">Submit Application →</button>
+  <div class="btn-row" style="margin-top:15px;">
+    <button class="btn btn-ghost" onclick="goTo(0)">← Back</button>
+  </div>
+</div>
+
+<!-- ================= ধাপ ২: লগইন ================= -->
+<div id="step2" class="screen">
+  <h1 class="brand-font">Member Login</h1>
+  <p class="sub">আপনার প্রিমিয়াম পোর্টালে প্রবেশ করুন।</p>
+  <div class="alert" id="loginAlert"></div>
+
+  <label>Email Address</label>
+  <input id="loginEmail" type="email" placeholder="you@company.com">
+
+  <label>Password</label>
+  <input id="loginPass" type="password" placeholder="আপনার পাসওয়ার্ড">
+
+  <button class="btn btn-primary" onclick="doLogin()">Login Securely →</button>
+  <div class="btn-row" style="margin-top:15px;">
+    <button class="btn btn-ghost" onclick="goTo(0)">← Back</button>
+  </div>
+</div>
+
+<!-- ================= ধাপ ৩: ড্যাশবোর্ড ================= -->
+<div id="step3" class="screen">
+  <h1 class="brand-font">VIP Dashboard</h1>
+  <p class="sub">স্বাগতম, আমাদের ভ্যালুয়েবল পার্টনার।</p>
+
+  <div class="user-card">
+    <div class="avatar" id="dashAvatar">?</div>
+    <div class="info">
+      <b id="dashName">Partner Name</b>
+      <small id="dashEmail">email@company.com</small>
+      <small id="dashPhone">01XXXXXXXXX</small>
+    </div>
+  </div>
+
+  <div class="quick-grid">
+    <div class="quick-card" onclick="goTo(4)"><span class="ic">💼</span><span>Premium Services</span></div>
+    <div class="quick-card" onclick="goTo(5)"><span class="ic">👑</span><span>VIP Pricing</span></div>
+    <div class="quick-card" onclick="goTo(6)"><span class="ic">💳</span><span>Secure Billing</span></div>
+    <div class="quick-card" onclick="logout()"><span class="ic">🚪</span><span>Logout</span></div>
+  </div>
+</div>
+
+<!-- ================= ধাপ ৪: সার্ভিস / অপশন ================= -->
+<div id="step4" class="screen">
+  <h1 class="brand-font">Exclusive Services</h1>
+  <p class="sub">আপনার ব্যবসার জন্য প্রিমিয়াম সার্ভিস বেছে নিন।</p>
+  <div class="alert" id="svcAlert"></div>
+
+  <div class="service-card" data-svc="High-Ticket Affiliate" onclick="selectService(this)">
+    <div class="ic">💎</div>
+    <div class="txt"><b>High-Ticket Affiliate Network</b><small>প্রিমিয়াম ক্লায়েন্টদের জন্য এক্সক্লুসিভ অ্যাফিলিয়েট নেটওয়ার্ক।</small></div>
+  </div>
+  <div class="service-card" data-svc="Luxury Branding" onclick="selectService(this)">
+    <div class="ic">🎨</div>
+    <div class="txt"><b>Luxury Brand Identity</b><small>আপনার ব্র্যান্ডকে একটি প্রিমিয়াম ও ক্লাসি লুক দিন।</small></div>
+  </div>
+  <div class="service-card" data-svc="VIP Traffic" onclick="selectService(this)">
+    <div class="ic">📈</div>
+    <div class="txt"><b>VIP Traffic Generation</b><small>হাই-কনভার্টিং এবং প্রিমিয়াম ট্রাফিক জেনারেট করুন।</small></div>
+  </div>
+
+  <div class="btn-row" style="margin-top:24px;">
+    <button class="btn btn-ghost" onclick="goTo(3)">← Back</button>
+    <button class="btn btn-primary" onclick="goTo(5)">View Plans →</button>
+  </div>
+</div>
+
+<!-- ================= ধাপ ৫: প্ল্যান / দাম ================= -->
+<div id="step5" class="screen">
+  <h1 class="brand-font">VIP Pricing</h1>
+  <p class="sub" id="planSub">আপনার প্রয়োজন অনুযায়ী প্রিমিয়াম প্ল্যান বেছে নিন।</p>
+  <div class="alert" id="planAlert"></div>
+
+  <div class="plan-card" data-plan="Gold" data-price="9999" onclick="selectPlan(this)">
+    <b>GOLD PARTNER</b>
+    <div class="price">৳৯,৯৯৯ <small>/month</small></div>
+    <ul>
+      <li>Premium Network Access</li>
+      <li>Dedicated Account Manager</li>
+      <li>24/7 Priority Support</li>
+    </ul>
+  </div>
+
+  <div class="plan-card" data-plan="Platinum" data-price="24999" onclick="selectPlan(this)">
+    <span class="badge">MOST POPULAR</span>
+    <b>PLATINUM PARTNER</b>
+    <div class="price">৳২৪,৯৯৯ <small>/month</small></div>
+    <ul>
+      <li>All Gold Features</li>
+      <li>Exclusive High-Ticket Deals</li>
+      <li>Custom Campaign Strategy</li>
+      <li>Direct Founder Access</li>
+    </ul>
+  </div>
+
+  <div class="plan-card" data-plan="Diamond" data-price="49999" onclick="selectPlan(this)">
+    <b>DIAMOND PARTNER</b>
+    <div class="price">৳৪৯,৯৯৯ <small>/month</small></div>
+    <ul>
+      <li>All Platinum Features</li>
+      <li>White-label Solutions</li>
+      <li>Unlimited Revisions</li>
+      <li>Private Mastermind Invites</li>
+    </ul>
+  </div>
+
+  <div class="btn-row" style="margin-top:24px;">
+    <button class="btn btn-ghost" onclick="goTo(4)">← Back</button>
+    <button class="btn btn-primary" onclick="goTo(6)">Proceed to Payment →</button>
+  </div>
+</div>
+
+<!-- ================= ধাপ ৬: পেমেন্ট ================= -->
+<div id="step6" class="screen">
+  <h1 class="brand-font">Secure Checkout</h1>
+  <p class="sub">আপনার অর্ডারের বিবরণ নিশ্চিত করুন।</p>
+
+  <div class="summary">
+    <div class="row"><span>Selected Service</span><b id="sumService">—</b></div>
+    <div class="row"><span>VIP Plan</span><b id="sumPlan">—</b></div>
+    <div class="row total"><span>Total Amount</span><b id="sumTotal">৳০</b></div>
+  </div>
+
+  <div class="alert" id="payAlert"></div>
+
+  <label>Payment Method</label>
+  <select id="payMethod">
+    <option value="bKash">bKash (Premium)</option>
+    <option value="Nagad">Nagad</option>
+    <option value="Bank Transfer">Bank Transfer (Wire)</option>
+    <option value="Credit Card">Credit/Debit Card</option>
+  </select>
+
+  <label>Account / Card Number</label>
+  <input id="payAccount" type="text" placeholder="Enter your payment details">
+
+  <button class="btn btn-primary" onclick="doPayment()">Confirm Secure Payment →</button>
+  <div class="btn-row" style="margin-top:15px;">
+    <button class="btn btn-ghost" onclick="goTo(5)">← Back</button>
+  </div>
+</div>
+
+<!-- ================= ধাপ ৭: সফল ================= -->
+<div id="step7" class="screen">
+  <div class="center">
+    <div class="success-icon">✓</div>
+    <h1 class="brand-font">Welcome to the Elite!</h1>
+    <p class="sub">আপনার পেমেন্ট সফলভাবে সম্পন্ন হয়েছে। আমাদের টিম শীঘ্রই আপনার সাথে যোগাযোগ করবে।</p>
+  </div>
+
+  <div class="summary">
+    <div class="row"><span>Partner Name</span><b id="okName">—</b></div>
+    <div class="row"><span>Service</span><b id="okService">—</b></div>
+    <div class="row"><span>Membership</span><b id="okPlan">—</b></div>
+    <div class="row"><span>Paid Via</span><b id="okMethod">—</b></div>
+    <div class="row total"><span>Amount Paid</span><b id="okTotal">৳০</b></div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-primary" onclick="goTo(3)">Go to Dashboard</button>
+  </div>
+</div>
+
+<!-- ================= জাভাস্ক্রিপ্ট ================= -->
+<script>
+let state = {
+  user: null,
+  service: null,
+  plan: null,
+  price: 0,
+  payment: null,
+  step: 0
+};
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem("barman_premium_state");
+    if (saved) state = JSON.parse(saved);
+  } catch(e) {}
+}
+function saveState() {
+  localStorage.setItem("barman_premium_state", JSON.stringify(state));
+}
+
+function goTo(step) {
+  if (step >= 3 && !state.user) step = 2;
+  if (step === 5 && !state.service) step = 4;
+  if (step === 6 && (!state.service || !state.plan)) step = 5;
+
+  state.step = step;
+  saveState();
+
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  const el = document.getElementById("step" + step);
+  if (el) el.classList.add("active");
+
+  const total = 7;
+  const pct = (step / total) * 100;
+  document.getElementById("progressFill").style.width = pct + "%";
+
+  document.querySelectorAll(".steps-labels span").forEach(sp => {
+    sp.classList.toggle("active", +sp.dataset.step === step);
+  });
+
+  if (step === 3) refreshDashboard();
+  if (step === 6) refreshPaymentSummary();
+  if (step === 7) refreshSuccess();
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function doRegister() {
+  const alertBox = document.getElementById("regAlert");
+  alertBox.classList.remove("show", "alert-ok");
+
+  const name = document.getElementById("regName").value.trim();
+  const email = document.getElementById("regEmail").value.trim();
+  const phone = document.getElementById("regPhone").value.trim();
+  const pass = document.getElementById("regPass").value;
+  const pass2 = document.getElementById("regPass2").value;
+
+  function fail(msg) { alertBox.textContent = msg; alertBox.classList.add("show"); }
+
+  if (!name) return fail("পুরো নাম দিন।");
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail("সঠিক ইমেইল দিন।");
+  if (!phone || !/^01[3-9]\d{8}$/.test(phone)) return fail("সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন।");
+  if (pass.length < 6) return fail("পাসওয়ার্ড কমপক্ষে ৬ অক্ষর হতে হবে।");
+  if (pass !== pass2) return fail("দুই পাসওয়ার্ড মিলছে না।");
+
+  state.user = { name, email, phone, pass };
+  saveState();
+
+  alertBox.textContent = "✅ Application Approved! Redirecting to login...";
+  alertBox.classList.add("show", "alert-ok");
+
+  setTimeout(() => {
+    document.getElementById("loginEmail").value = email;
+    goTo(2);
+  }, 1500);
+}
+
+function doLogin() {
+  const alertBox = document.getElementById("loginAlert");
+  alertBox.classList.remove("show", "alert-ok");
+
+  const email = document.getElementById("loginEmail").value.trim();
+  const pass = document.getElementById("loginPass").value;
+
+  if (!state.user) return (alertBox.textContent = "কোনো অ্যাকাউন্ট নেই। আগে রেজিস্ট্রেশন করুন।", alertBox.classList.add("show"));
+  if (email !== state.user.email) return (alertBox.textContent = "এই ইমেইলে কোনো অ্যাকাউন্ট নেই।", alertBox.classList.add("show"));
+  if (pass !== state.user.pass) return (alertBox.textContent = "পাসওয়ার্ড ভুল হয়েছে।", alertBox.classList.add("show"));
+  
+  goTo(3);
+}
+
+function refreshDashboard() {
+  if (!state.user) return;
+  const initials = state.user.name.split(" ").map(w => w[0]).join("").substring(0,2).toUpperCase();
+  document.getElementById("dashAvatar").textContent = initials || "?";
+  document.getElementById("dashName").textContent = state.user.name;
+  document.getElementById("dashEmail").textContent = state.user.email;
+  document.getElementById("dashPhone").textContent = state.user.phone;
+}
+
+function selectService(el) {
+  document.querySelectorAll("#step4 .service-card").forEach(c => c.classList.remove("selected"));
+  el.classList.add("selected");
+  state.service = el.dataset.svc;
+  saveState();
+}
+
+function selectPlan(el) {
+  document.querySelectorAll("#step5 .plan-card").forEach(c => c.classList.remove("selected"));
+  el.classList.add("selected");
+  state.plan = el.dataset.plan;
+  state.price = +el.dataset.price;
+  saveState();
+}
+
+function refreshPaymentSummary() {
+  document.getElementById("sumService").textContent = state.service || "—";
+  document.getElementById("sumPlan").textContent = state.plan || "—";
+  document.getElementById("sumTotal").textContent = "৳" + (state.price || 0).toLocaleString("en-IN");
+  
+  const sub = document.getElementById("planSub");
+  if (state.service) sub.textContent = `"${state.service}" এর জন্য একটি প্রিমিয়াম প্ল্যান বেছে নিন।`;
+  
+  if (!state.service) goTo(4);
+}
+
+function doPayment() {
+  const alertBox = document.getElementById("payAlert");
+  alertBox.classList.remove("show", "alert-ok");
+
+  const method = document.getElementById("payMethod").value;
+  const account = document.getElementById("payAccount").value.trim();
+
+  if (!account) return (alertBox.textContent = "পেমেন্ট ডিটেইলস দিন।", alertBox.classList.add("show"));
+
+  state.payment = { method, account };
+  saveState();
+
+  alertBox.textContent = "⏳ Processing Secure Payment...";
+  alertBox.classList.add("show", "alert-ok");
+
+  setTimeout(() => { goTo(7); }, 1500);
+}
+
+function refreshSuccess() {
+  document.getElementById("okName").textContent = state.user ? state.user.name : "—";
+  document.getElementById("okService").textContent = state.service || "—";
+  document.getElementById("okPlan").textContent = state.plan || "—";
+  document.getElementById("okMethod").textContent = state.payment ? state.payment.method : "—";
+  document.getElementById("okTotal").textContent = "৳" + (state.price || 0).toLocaleString("en-IN");
+}
+
+function logout() {
+  state = { user:null, service:null, plan:null, price:0, payment:null, step:0 };
+  saveState();
+  document.getElementById("loginEmail").value = "";
+  document.getElementById("loginPass").value = "";
+  goTo(0);
+}
+
+(function init() {
+  loadState();
+  if (state.user && state.step >= 3) {
+    goTo(state.step);
+  } else {
+    goTo(0);
+  }
+})();
 </script>
 </body>
 </html>
