@@ -1,13 +1,179 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barman Marketing</title>
+    <title>Barman Marketing | Premium Marketplace</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #0f172a; /* Premium Dark Blue */
+            color: #f8fafc;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: rgba(15, 23, 42, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #10b981; /* Emerald Green */
+            letter-spacing: 1px;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 400;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #10b981;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #10b981, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-btn {
+            background: #10b981;
+            color: white;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.6);
+        }
+
+        /* Features */
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 60px 5%;
+            flex-wrap: wrap;
+            background-color: #0f172a;
+        }
+
+        .card {
+            background-color: #1e293b;
+            padding: 40px 30px;
+            border-radius: 15px;
+            width: 300px;
+            text-align: center;
+            border: 1px solid #334155;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: #10b981;
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: #f1f5f9;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .card p {
+            color: #94a3b8;
+            font-size: 15px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #020617;
+            color: #64748b;
+            border-top: 1px solid #1e293b;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Barman Marketing</h1>
-    <p>Premium Affiliate Marketing Platform</p>
-    <p>Discover trending products and exclusive deals.</p>
+
+    <nav>
+        <div class="logo">BARMAN MARKETING</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Products</a>
+            <a href="#">Vendors</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Premium Affiliate Marketplace</h1>
+        <p>সঠিক দামে বিক্রি করুন, ন্যায্য দামে কিনুন। বাংলাদেশের সবচেয়ে বিশ্বস্ত মার্কেটপ্লেসে আপনাকে স্বাগতম।</p>
+        <a href="#" class="cta-btn">Get Started</a>
+    </section>
+
+    <section class="features">
+        <div class="card">
+            <h3>🚀 সেলারদের জন্য</h3>
+            <p>নিজের ড্যাশবোর্ড থেকে সহজে পণ্য আপলোড করুন এবং সঠিক দামে বিক্রি করুন।</p>
+        </div>
+        <div class="card">
+            <h3>🛍️ কাস্টমারদের জন্য</h3>
+            <p>প্রিমিয়াম কোয়ালিটি সম্পন্ন পণ্য, স্বচ্ছ মূল্য এবং নিরাপদ কেনাকাটা।</p>
+        </div>
+        <div class="card">
+            <h3>💼 কমিশন সিস্টেম</h3>
+            <p>প্রতিটি সফল বিক্রয়ের উপর অল্প পরিমাণ কমিশন, কোনো লুকানো চার্জ নেই।</p>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2024 Barman Marketing. All rights reserved.
+    </footer>
+
 </body>
 </html>
