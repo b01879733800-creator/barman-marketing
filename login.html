@@ -108,7 +108,7 @@
         </div>
     </div>
 
-    <!-- ফায়ারবেস লগইন স্ক্রিপ্ট -->
+    <!-- ফায়ারবেস স্ক্রিপ্ট -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
@@ -134,7 +134,7 @@
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     alert("সফলভাবে লগইন হয়েছে!");
-                    window.location.href = "index.html"; // আপাতত হোমপেজে পাঠাচ্ছি
+                    window.location.href = "dashboard.html";
                 })
                 .catch((error) => {
                     alert("লগইন ব্যর্থ হয়েছে: " + error.message);
