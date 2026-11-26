@@ -4,161 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Barman Marketing</title>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
-            background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
-            color: #ffffff;
-            min-height: 100vh;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: #0f172a; color: #f8fafc; min-height: 100vh; }
+        
+        /* Navbar Design */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 30px;
-            background: rgba(30, 41, 59, 0.7);
+            padding: 20px 5%;
+            background-color: rgba(30, 41, 59, 0.8);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
             position: sticky;
             top: 0;
             z-index: 100;
+            border-bottom: 1px solid #334155;
         }
-        .logo { font-size: 22px; font-weight: 800; color: #2dd4bf; letter-spacing: 1px;}
+        .logo { font-size: 24px; font-weight: 700; color: #10b981; }
         .logout-btn {
-            background-color: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
-            border: 1px solid #ef4444;
-            padding: 8px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-        .logout-btn:hover { background-color: #ef4444; color: white; }
-        
-        .dashboard-container {
-            padding: 40px 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .welcome-header {
-            margin-bottom: 30px;
-        }
-        .welcome-header h1 {
-            font-size: 28px;
-            color: #ffffff;
-        }
-        .welcome-header p {
-            color: #94a3b8;
-            font-size: 14px;
-            margin-top: 5px;
+            background-color: #ef4444; color: white; border: none;
+            padding: 8px 16px; border-radius: 5px; cursor: pointer; font-weight: bold;
         }
 
-        .grid-container {
+        /* Product Grid Design */
+        .container { padding: 40px 5%; }
+        h2 { margin-bottom: 20px; font-size: 28px; }
+        
+        #productList {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
         }
 
-        .premium-card {
-            background: rgba(30, 41, 59, 0.4);
-            border: 1px solid rgba(45, 212, 191, 0.2);
-            border-radius: 16px;
-            padding: 25px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-            transition: 0.3s;
+        /* Individual Product Card */
+        .product-card {
+            border: 1px solid #334155;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #1e293b;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
         }
-        .premium-card:hover {
-            border-color: rgba(45, 212, 191, 0.6);
-            transform: translateY(-2px);
+        .product-card:hover { transform: translateY(-5px); }
+        .product-card img {
+            width: 100%; height: 180px; object-fit: cover;
+            border-radius: 8px; margin-bottom: 10px;
         }
-
-        .card-title {
-            font-size: 18px;
-            color: #2dd4bf;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .email-display {
-            background: linear-gradient(90deg, #2dd4bf, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 22px;
-            font-weight: 800;
-            word-break: break-all;
-            margin-top: 10px;
-        }
-
-        /* প্রিমিয়াম অ্যানিমেটেড নোটিফিকেশন (Toast) */
-        #toast {
-            visibility: hidden;
-            min-width: 250px;
-            background: linear-gradient(90deg, #2dd4bf, #3b82f6);
-            color: #fff;
-            text-align: center;
-            border-radius: 50px;
-            padding: 16px;
-            position: fixed;
-            z-index: 1000;
-            left: 50%;
-            bottom: 30px;
-            transform: translateX(-50%) translateY(100px);
-            font-size: 16px;
-            font-weight: 600;
-            opacity: 0;
-            transition: all 0.4s ease-in-out;
-            box-shadow: 0 10px 20px rgba(45, 212, 191, 0.4);
-        }
-
-        #toast.show {
-            visibility: visible;
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
+        .product-card h3 { color: #10b981; margin-bottom: 10px; font-size: 20px; }
+        .product-card p { font-size: 14px; color: #cbd5e1; margin-bottom: 8px; line-height: 1.5; }
+        .product-price { font-size: 18px; font-weight: bold; color: #fbbf24; }
     </style>
 </head>
 <body>
 
+    <!-- Navbar -->
     <nav class="navbar">
-        <div class="logo">BARMAN</div>
-        <button class="logout-btn" onclick="logout()">Log Out</button>
+        <div class="logo">Barman Marketing</div>
+        <button class="logout-btn" onclick="logout()">Logout</button>
     </nav>
 
-    <div class="dashboard-container">
-        <div class="welcome-header">
-            <h1>Dashboard Overview</h1>
-            <p>আপনার অ্যাকাউন্টের সবকিছু এখানে নিয়ন্ত্রণ করুন।</p>
-        </div>
-
-        <div class="grid-container">
-            <div class="premium-card">
-                <div class="card-title">👤 Account Profile</div>
-                <p style="color: #94a3b8; font-size: 14px;">আপনি এই ইমেইল দিয়ে লগইন করেছেন:</p>
-                <div class="email-display" id="userEmail">লোড হচ্ছে...</div>
-            </div>
-
-            <div class="premium-card">
-                <div class="card-title">📊 Performance Overview</div>
-                <p style="color: #94a3b8; font-size: 14px;">আপনার অ্যাফিলিয়েট মার্কেটিং স্ট্যাটস শীঘ্রই এখানে যুক্ত হবে।</p>
-            </div>
-        </div>
+    <!-- Main Content -->
+    <div class="container">
+        <h2>Available Products</h2>
+        <!-- ফায়ারবেস থেকে পণ্য এখানে দেখাবে -->
+        <div id="productList">Loading products...</div>
     </div>
 
-    <!-- কাস্টম নোটিফিকেশন ডিভ -->
-    <div id="toast">সফলভাবে লগইন হয়েছে!</div>
-
-    <!-- ফায়ারবেস স্ক্রিপ্ট -->
+    <!-- Firebase Script -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+        // আপনার ফায়ারবেস কনফিগারেশন
         const firebaseConfig = {
             apiKey: "AIzaSyDFK97UqNMmV0PLcCiKelBrnxurMXBDLPs",
             authDomain: "barman-market.firebaseapp.com",
@@ -168,32 +87,66 @@
             appId: "1:1034964147995:web:525542140ca017dcbbbdbe"
         };
 
+        // ফায়ারবেস চালু করা
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
-        // কাস্টম নোটিফিকেশন দেখানোর ফাংশন
-        function showToast() {
-            var toast = document.getElementById("toast");
-            toast.className = "show";
-            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
-        }
-
+        // ১. লগইন চেক করা (লগইন না থাকলে লগইন পেজে পাঠাবে)
         onAuthStateChanged(auth, (user) => {
-            if (user) {
-                document.getElementById('userEmail').innerText = user.email;
-                showToast(); // পেজ লোড হলেই সুন্দর মেসেজ আসবে
-            } else {
+            if (!user) {
                 window.location.href = "login.html";
             }
         });
 
+        // ২. লগআউট ফাংশন
         window.logout = function() {
             signOut(auth).then(() => {
                 window.location.href = "login.html";
-            }).catch((error) => {
-                alert("লগআউট করতে সমস্যা হয়েছে!");
             });
+        };
+
+        // ৩. ডেটাবেস থেকে পণ্য আনা
+        async function loadProducts() {
+            const productListDiv = document.getElementById('productList');
+            
+            // ⚠️ এখানে আপনার কালেকশনের নামটা বসাতে হবে (যেমন: "products")
+            const collectionName ="products";
+        
+            try {
+                const querySnapshot = await getDocs(collection(db, collectionName));
+                let htmlContent = "";
+
+                if (querySnapshot.empty) {
+                    productListDiv.innerHTML = "<p>দুঃখিত, কোনো পণ্য পাওয়া যায়নি।</p>";
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    
+                    // পণ্যের ডিজাইন
+                    htmlContent += `
+                        <div class="product-card">
+                            <img src="${data.imageUrl || 'https://via.placeholder.com/150'}" alt="${data.productName}">
+                            <h3>${data.productName}</h3>
+                            <p>${data.productDescription}</p>
+                            <p><strong>Vendor:</strong> ${data.vendorName}</p>
+                            <p class="product-price">৳${data.Price}</p>
+                        </div>
+                    `;
+                });
+
+                productListDiv.innerHTML = htmlContent;
+
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+                productListDiv.innerHTML = `<p style="color: red;">এরর: ${error.message}</p>`;
+            }
         }
+
+        // ফাংশন কল করা
+        loadProducts();
     </script>
 </body>
 </html>
