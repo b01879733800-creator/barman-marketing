@@ -9,7 +9,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Poppins', 'Hind Siliguri', sans-serif;
-            background-color: #0f172a; /* ডার্ক থিম */
+            background-color: #0f172a; 
             color: #ffffff;
             display: flex;
             justify-content: center;
@@ -26,25 +26,10 @@
             max-width: 450px;
             border: 1px solid #334155;
         }
-        .signup-container h2 {
-            text-align: center;
-            margin-bottom: 5px;
-            font-size: 26px;
-            color: #2dd4bf; /* নিয়ন গ্রিন */
-        }
-        .signup-container p {
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 14px;
-            color: #94a3b8;
-        }
+        .signup-container h2 { text-align: center; margin-bottom: 5px; font-size: 26px; color: #2dd4bf; }
+        .signup-container p { text-align: center; margin-bottom: 25px; font-size: 14px; color: #94a3b8; }
         
-        /* অ্যাকাউন্ট টাইপ সিলেক্টর (Buyer vs Seller) */
-        .account-type-selector {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
+        .account-type-selector { display: flex; gap: 15px; margin-bottom: 25px; }
         .type-card {
             flex: 1;
             background-color: #0f172a;
@@ -55,45 +40,20 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        .type-card:hover {
-            border-color: #3b82f6;
-        }
-        /* রেডিও বাটন হাইড করা হয়েছে, কিন্তু কাজ করবে */
-        .type-card input[type="radio"] {
-            display: none; 
-        }
-        .type-card h3 {
-            font-size: 16px;
-            margin-bottom: 5px;
-            color: #e2e8f0;
-        }
-        .type-card span {
-            font-size: 12px;
-            color: #64748b;
-        }
-        /* রেডিও সিলেক্ট করলে কার্ডের রঙ পরিবর্তন হবে */
-        .type-card input[type="radio"]:checked + h3 {
-            color: #2dd4bf;
-        }
-        .type-card input[type="radio"]:checked ~ span {
-            color: #cbd5e1;
-        }
+        .type-card:hover { border-color: #3b82f6; }
+        .type-card input[type="radio"] { display: none; }
+        .type-card h3 { font-size: 16px; margin-bottom: 5px; color: #e2e8f0; }
+        .type-card span { font-size: 12px; color: #64748b; }
+        .type-card input[type="radio"]:checked + h3 { color: #2dd4bf; }
+        .type-card input[type="radio"]:checked ~ span { color: #cbd5e1; }
         .type-card:has(input[type="radio"]:checked) {
             border-color: #2dd4bf;
             background-color: rgba(45, 212, 191, 0.05);
             box-shadow: 0 0 15px rgba(45, 212, 191, 0.2);
         }
 
-        /* ইনপুট ফিল্ড */
-        .input-group {
-            margin-bottom: 18px;
-        }
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #cbd5e1;
-        }
+        .input-group { margin-bottom: 18px; }
+        .input-group label { display: block; margin-bottom: 8px; font-size: 14px; color: #cbd5e1; }
         .input-group input {
             width: 100%;
             padding: 12px 15px;
@@ -105,10 +65,7 @@
             outline: none;
             transition: 0.3s;
         }
-        .input-group input:focus {
-            border-color: #2dd4bf;
-            box-shadow: 0 0 10px rgba(45, 212, 191, 0.2);
-        }
+        .input-group input:focus { border-color: #2dd4bf; box-shadow: 0 0 10px rgba(45, 212, 191, 0.2); }
 
         .btn-submit {
             width: 100%;
@@ -123,20 +80,29 @@
             transition: 0.3s;
             margin-top: 15px;
         }
-        .btn-submit:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
+        .btn-submit:hover { opacity: 0.9; transform: translateY(-2px); }
+        .login-link { text-align: center; margin-top: 20px; font-size: 14px; color: #94a3b8; }
+        .login-link a { color: #2dd4bf; text-decoration: none; }
+
+        /* প্রিমিয়াম নোটিফিকেশন স্টাইল */
+        .custom-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: linear-gradient(90deg, #2dd4bf, #3b82f6);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            z-index: 9999;
+            box-shadow: 0 10px 25px rgba(45, 212, 191, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
-        .login-link {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #94a3b8;
-        }
-        .login-link a {
-            color: #2dd4bf;
-            text-decoration: none;
-        }
+        .custom-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; visibility: visible; }
+        .custom-toast.error { background: linear-gradient(90deg, #ef4444, #f97316); box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4); }
     </style>
 </head>
 <body>
@@ -146,7 +112,6 @@
         <p>আপনার অ্যাকাউন্টের ধরন নির্বাচন করুন</p>
         
         <form id="signupForm">
-            <!-- অ্যাকাউন্ট টাইপ -->
             <div class="account-type-selector">
                 <label class="type-card">
                     <input type="radio" name="account_type" value="buyer" checked>
@@ -183,43 +148,65 @@
         </div>
     </div>
 
-</body>
+    <!-- কাস্টম নোটিফিকেশন ডিভ -->
+    <div id="toast" class="custom-toast"></div>
+
+    <!-- ফায়ারবেস স্ক্রিপ্ট -->
     <script type="module">
-  // Firebase SDK Import
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
 
-  // আপনার ফায়ারবেস কনফিগারেশন
-  const firebaseConfig = {
-    apiKey: "AIzaSyDFK97UqNMmV0PLcCiKelBrnxurMXBDLPs",
-    authDomain: "barman-market.firebaseapp.com",
-    projectId: "barman-market",
-    storageBucket: "barman-market.firebasestorage.app",
-    messagingSenderId: "1034964147995",
-    appId: "1:1034964147995:web:525542140ca017dcbbbdbe"
-  };
+        const firebaseConfig = {
+            apiKey: "AIzaSyDFK97UqNMmV0PLcCiKelBrnxurMXBDLPs",
+            authDomain: "barman-market.firebaseapp.com",
+            projectId: "barman-market",
+            storageBucket: "barman-market.firebasestorage.app",
+            messagingSenderId: "1034964147995",
+            appId: "1:1034964147995:web:525542140ca017dcbbbdbe"
+        };
 
-  // ফায়ারবেস চালু করা
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
 
-  // ফর্ম সাবমিট করলে যা হবে
-  document.getElementById('signupForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // পেজ রিলোড হওয়া আটকায়
+        // নোটিফিকেশন দেখানোর ফাংশন
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            
+            if(isError) {
+                toast.classList.add('error');
+            } else {
+                toast.classList.remove('error');
+            }
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
 
-    // ইনপুট থেকে ইমেইল এবং পাসওয়ার্ড নেয়া
-    const email = document.querySelector('input[type="email"]').value;
-    const password = document.querySelector('input[type="password"]').value;
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.querySelector('input[type="email"]').value;
+            const password = document.querySelector('input[type="password"]').value;
 
-    // অ্যাকাউন্ট তৈরি করা
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        alert("সফলভাবে অ্যাকাউন্ট তৈরি হয়েছে!");
-        // window.location.href = "index.html"; // সফল হলে হোমপেজে পাঠাতে চাইলে এই লাইনের সামনের // মুছে দিন
-      })
-      .catch((error) => {
-        alert("সমস্যা হয়েছে: " + error.message);
-      });
-  });
-</script>
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    showToast("সফলভাবে অ্যাকাউন্ট তৈরি হয়েছে!");
+                    setTimeout(() => {
+                        window.location.href = "dashboard.html";
+                    }, 1500);
+                })
+                .catch((error) => {
+                    if (error.code === 'auth/email-already-in-use') {
+                        showToast("এই ইমেইলটি আগে থেকেই ব্যবহার করা হয়েছে!", true);
+                    } else {
+                        showToast("সমস্যা হয়েছে: " + error.message, true);
+                    }
+                });
+        });
+    </script>
+</body>
 </html>
