@@ -9,7 +9,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Poppins', 'Hind Siliguri', sans-serif;
-            background-color: #0f172a; 
+            background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
             color: #ffffff;
             min-height: 100vh;
         }
@@ -18,52 +18,109 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 30px;
-            background-color: #1e293b;
-            border-bottom: 1px solid #334155;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .logo { font-size: 20px; font-weight: 800; color: #2dd4bf; }
+        .logo { font-size: 22px; font-weight: 800; color: #2dd4bf; letter-spacing: 1px;}
         .logout-btn {
-            background-color: #ef4444;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid #ef4444;
+            padding: 8px 20px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
             transition: 0.3s;
         }
-        .logout-btn:hover { background-color: #dc2626; }
+        .logout-btn:hover { background-color: #ef4444; color: white; }
         
         .dashboard-container {
             padding: 40px 20px;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
-        .welcome-card {
-            background-color: #1e293b;
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid #334155;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            text-align: center;
+        
+        .welcome-header {
+            margin-bottom: 30px;
         }
-        .welcome-card h1 {
-            color: #2dd4bf;
-            margin-bottom: 10px;
+        .welcome-header h1 {
+            font-size: 28px;
+            color: #ffffff;
         }
-        .welcome-card p {
+        .welcome-header p {
             color: #94a3b8;
-            margin-bottom: 20px;
+            font-size: 14px;
+            margin-top: 5px;
         }
-        .email-display {
-            background-color: #0f172a;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #334155;
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .premium-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            border-radius: 16px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+        .premium-card:hover {
+            border-color: rgba(45, 212, 191, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .card-title {
             font-size: 18px;
-            color: #3b82f6;
-            font-weight: 600;
+            color: #2dd4bf;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .email-display {
+            background: linear-gradient(90deg, #2dd4bf, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 22px;
+            font-weight: 800;
             word-break: break-all;
+            margin-top: 10px;
+        }
+
+        /* প্রিমিয়াম অ্যানিমেটেড নোটিফিকেশন (Toast) */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background: linear-gradient(90deg, #2dd4bf, #3b82f6);
+            color: #fff;
+            text-align: center;
+            border-radius: 50px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%) translateY(100px);
+            font-size: 16px;
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.4s ease-in-out;
+            box-shadow: 0 10px 20px rgba(45, 212, 191, 0.4);
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
     </style>
 </head>
@@ -75,15 +132,27 @@
     </nav>
 
     <div class="dashboard-container">
-        <div class="welcome-card">
-            <h1>Welcome to your Dashboard</h1>
-            <p>আপনি সফলভাবে লগইন করেছেন। এটি আপনার প্রাইভেট ড্যাশবোর্ড।</p>
-            
-            <h3>আপনার অ্যাকাউন্ট:</h3>
-            <br>
-            <div class="email-display" id="userEmail">লোড হচ্ছে...</div>
+        <div class="welcome-header">
+            <h1>Dashboard Overview</h1>
+            <p>আপনার অ্যাকাউন্টের সবকিছু এখানে নিয়ন্ত্রণ করুন।</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="premium-card">
+                <div class="card-title">👤 Account Profile</div>
+                <p style="color: #94a3b8; font-size: 14px;">আপনি এই ইমেইল দিয়ে লগইন করেছেন:</p>
+                <div class="email-display" id="userEmail">লোড হচ্ছে...</div>
+            </div>
+
+            <div class="premium-card">
+                <div class="card-title">📊 Performance Overview</div>
+                <p style="color: #94a3b8; font-size: 14px;">আপনার অ্যাফিলিয়েট মার্কেটিং স্ট্যাটস শীঘ্রই এখানে যুক্ত হবে।</p>
+            </div>
         </div>
     </div>
+
+    <!-- কাস্টম নোটিফিকেশন ডিভ -->
+    <div id="toast">সফলভাবে লগইন হয়েছে!</div>
 
     <!-- ফায়ারবেস স্ক্রিপ্ট -->
     <script type="module">
@@ -102,22 +171,25 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        // ইউজার লগইন আছে কিনা চেক করা
+        // কাস্টম নোটিফিকেশন দেখানোর ফাংশন
+        function showToast() {
+            var toast = document.getElementById("toast");
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // লগইন থাকলে ইমেইল দেখানো
                 document.getElementById('userEmail').innerText = user.email;
+                showToast(); // পেজ লোড হলেই সুন্দর মেসেজ আসবে
             } else {
-                // লগইন না থাকলে সোজা লগইন পেজে পাঠিয়ে দেওয়া
                 window.location.href = "login.html";
             }
         });
 
-        // লগআউট ফাংশন
         window.logout = function() {
             signOut(auth).then(() => {
-                alert("সফলভাবে লগআউট হয়েছেন!");
-                window.location.href = "index.html";
+                window.location.href = "login.html";
             }).catch((error) => {
                 alert("লগআউট করতে সমস্যা হয়েছে!");
             });
