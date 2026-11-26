@@ -145,7 +145,7 @@
         <h2>Join Barman</h2>
         <p>আপনার অ্যাকাউন্টের ধরন নির্বাচন করুন</p>
         
-        <form action="#" method="POST">
+        <form id="signupForm">
             <!-- অ্যাকাউন্ট টাইপ -->
             <div class="account-type-selector">
                 <label class="type-card">
@@ -184,4 +184,42 @@
     </div>
 
 </body>
+    <script type="module">
+  // Firebase SDK Import
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
+  // আপনার ফায়ারবেস কনফিগারেশন
+  const firebaseConfig = {
+    apiKey: "AIzaSyDFK97UqNMmV0PLcCiKelBrnxurMXBDLPs",
+    authDomain: "barman-market.firebaseapp.com",
+    projectId: "barman-market",
+    storageBucket: "barman-market.firebasestorage.app",
+    messagingSenderId: "1034964147995",
+    appId: "1:1034964147995:web:525542140ca017dcbbbdbe"
+  };
+
+  // ফায়ারবেস চালু করা
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // ফর্ম সাবমিট করলে যা হবে
+  document.getElementById('signupForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // পেজ রিলোড হওয়া আটকায়
+
+    // ইনপুট থেকে ইমেইল এবং পাসওয়ার্ড নেয়া
+    const email = document.querySelector('input[type="email"]').value;
+    const password = document.querySelector('input[type="password"]').value;
+
+    // অ্যাকাউন্ট তৈরি করা
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        alert("সফলভাবে অ্যাকাউন্ট তৈরি হয়েছে!");
+        // window.location.href = "index.html"; // সফল হলে হোমপেজে পাঠাতে চাইলে এই লাইনের সামনের // মুছে দিন
+      })
+      .catch((error) => {
+        alert("সমস্যা হয়েছে: " + error.message);
+      });
+  });
+</script>
 </html>
